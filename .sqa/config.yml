@@ -1,0 +1,68 @@
+config:
+  credentials: []
+  project_repos:
+    github.com/EOSC-synergy/sqaaas-tooling:
+      branch: release/1.7.7
+      repo: https://github.com/EOSC-synergy/sqaaas-tooling
+    github.com/eosc-synergy/sqaaas-reporting:
+      branch: main
+      repo: https://github.com/eosc-synergy/sqaaas-reporting
+environment:
+  JPL_DOCKERFORCEBUILD: enabled
+  JPL_KEEPGOING: enabled
+sqa_criteria:
+  QC.Acc:
+    repos:
+      github.com/eosc-synergy/sqaaas-reporting git:
+        commands:
+        - /usr/bin/env sh .sqa/script.bumpy-cerulean-bloodhound.sh
+        container: qc.acc_baggy-khaki-beagle
+  QC.Doc:
+    repos:
+      github.com/eosc-synergy/sqaaas-reporting find_doc_files.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.sunny-harlequin-gecko.sh
+        container: qc.doc_chewy-auburn-gorilla
+      github.com/eosc-synergy/sqaaas-reporting git:
+        commands:
+        - /usr/bin/env sh .sqa/script.flaky-amethyst-sheep.sh
+        container: qc.doc_whiny-amethyst-mongrel
+      github.com/eosc-synergy/sqaaas-reporting markdownlint:
+        commands:
+        - /usr/bin/env sh .sqa/script.fuzzy-mustard-lemur.sh
+        container: qc.doc_woolly-asparagus-ibis
+  QC.Lic:
+    repos:
+      github.com/eosc-synergy/sqaaas-reporting licensee:
+        commands:
+        - /usr/bin/env sh .sqa/script.skinny-corn-discus.sh
+        container: qc.lic_scummy-amethyst-schnauzer
+  QC.Met:
+    repos:
+      github.com/eosc-synergy/sqaaas-reporting cff-converter-python:
+        commands:
+        - /usr/bin/env sh .sqa/script.frumpy-charcoal-goat.sh
+        container: qc.met_boozy-magenta-quoll
+  QC.Sec:
+    repos:
+      github.com/eosc-synergy/sqaaas-reporting bandit:
+        commands:
+        - /usr/bin/env sh .sqa/script.scanty-lemon-bloodhound.sh
+        container: qc.sec_breezy-champagne-chow
+  QC.Sty:
+    repos:
+      github.com/eosc-synergy/sqaaas-reporting flake8:
+        commands:
+        - /usr/bin/env sh .sqa/script.woolly-platinum-tetra.sh
+        container: qc.sty_lanky-aqua-hummingbird
+      github.com/eosc-synergy/sqaaas-reporting jsonlint:
+        commands:
+        - /usr/bin/env sh .sqa/script.flaky-charcoal-penguin.sh
+        container: qc.sty_sunny-malachite-lionfish
+  QC.Ver:
+    repos:
+      github.com/eosc-synergy/sqaaas-reporting get_git_tags.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.homely-flax-indri.sh
+        container: qc.ver_wimpy-lemon-newt
+timeout: 5400
